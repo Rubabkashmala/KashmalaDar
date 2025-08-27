@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<!-- saved from url=(0055)file:///C:/Users/emand/Downloads/Grouped%20Gallery.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kashmala Dar</title>
+    <link href="./Kashmala Dar_files/b00aa2c2d48dcf4804ceff01a44dc5bc.jpg" rel="stylesheet">
+    <style>
+        :root {
+            --dark-primary: #000000;
+            --dark-secondary: #11fa57;
+            --accent: #f95959;
+            --light: #fefefe;
+            --highlight: #fefefe;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark-primary);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--dark-secondary), var(--dark-primary));
+            padding: 3rem 0 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, var(--light), var(--highlight));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-weight: 300;
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 15vw;
+            font-weight: 900;
+            color: rgba(0, 255, 136, 0.155);
+            user-select: none;
+            z-index: 0;
+            white-space: nowrap;
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin: 2rem 0;
+            padding: 0 2rem;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .filter-btn {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: var(--light);
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .filter-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .filter-btn.active {
+            background: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(249, 89, 89, 0.4);
+        }
+
+        .gallery-container {
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .gallery-section {
+            margin-bottom: 5rem;
+            position: relative;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid rgba(255,255,255,0.1);
+            padding-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--light);
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            opacity: 0.7;
+            font-weight: 300;
+        }
+
+        .grid-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            transform: translateY(0);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            aspect-ratio: 1/1;
+            background: var(--dark-secondary);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.8) 100%);
+            z-index: 1;
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1);
+        }
+
+        .item-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            z-index: 2;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+
+        .gallery-item:hover .item-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .item-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .item-description {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-meta {
+            display: flex;
+            font-size: 0.8rem;
+            opacity: 0.7;
+            gap: 1rem;
+        }
+
+        .view-all {
+            position: absolute;
+            right: 0;
+            top: 0;
+            color: var(--highlight);
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .view-all:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .grid-wrapper {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .watermark {
+                font-size: 20vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Kashmala Dar</h1>
+            <p class="subtitle">A curated showcase of bold ideas and clean design, where creativity meets strategy. Each piece is crafted with purpose, 
+                balancing aesthetics with meaning to tell visual stories that connect and inspire.
+            </p>
+            <div class="watermark">Kashmala Dar</div>
+        </div>
+    </header>
+
+    <div class="filter-tabs">
+        <button class="filter-btn active" data-filter="all">Show All</button>
+        <button class="filter-btn" data-filter="landscapes">Profile Covers &amp; Banners</button>
+        <button class="filter-btn" data-filter="Food">Brand Promotions</button>
+        <button class="filter-btn" data-filter="wildlife">Resume</button>
+        <button class="filter-btn" data-filter="people">Book cover &amp; design</button>
+        <button class="filter-btn" data-filter="abstract">Presentations</button>
+        <button class="filter-btn" data-filter="abstract">Visual Marketings</button>
+    </div>
+
+    <div class="gallery-container">
+        <!-- Landscapes Gallery -->
+        <section class="gallery-section" data-category="landscapes">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">Profile Covers &amp; Banners</h2>
+                    <p class="section-subtitle">Designing brands that stands out.</p>
+                </div>
+                <a href="file:///C:/Users/emand/Downloads/Grouped%20Gallery.html#" class="view-all">View All →</a>
+            </div>
+            <div class="grid-wrapper">
+                <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <img src="./Kashmala Dar_files/6aecdc07b335f9c00526fe20306800a5.jpg" class="gallery-img">
+                    <div class="item-content">
+                        <h3 class="item-title">SEO Expert</h3>
+                        <p class="item-description">Unleashing the full potential of your online presence</p>
+                    </div>
+                </div>
+                <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <img src="./Kashmala Dar_files/b0a4a9264eae8102091c579727b3a278.jpg" class="gallery-img">
+                    <div class="item-content">
+                        <h3 class="item-title">Web Developer</h3>
+                        <p class="item-description">A fresh new look for a brighter online future!</p>
+                    </div>
+                </div>
+                <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <img src="./Kashmala Dar_files/e28ef88d27cddfb6a0c10e689a837626.jpg" class="gallery-img">
+                    <div class="item-content">
+                        <h3 class="item-title">Web Designer</h3>
+                        <p class="item-description">Designing success, one banner at a time!</p>
+                    </div>
+                </div>
+                <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <img src="./Kashmala Dar_files/63691fcc2e02b9fc2ea8b20345899d93.jpg" class="gallery-img">
+                    <div class="item-content">
+                        <h3 class="item-title">Esteemed client's work</h3>
+                        <p class="item-description">Before vs. After: The power of great design</p>
+                        </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Urban Gallery -->
+        <section class="gallery-section" data-category="urban">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">Brand promotions</h2>
+                    <p class="section-subtitle">Urban landscapes and architectural marvels</p>
+                </div>
+                <a href="file:///C:/Users/emand/Downloads/Grouped%20Gallery.html#" class="view-all">View All →</a>
+            </div>
+            <div class="grid-wrapper">
+                <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <img src="./Kashmala Dar_files/eb914b610962447bb47ea8f4268a1ff4.jpg" class="gallery-img">
+                    <div class="item-content">
+                        <h3 class="item-title">Sweet RED velvet cake</h3>
+                        <p class="item-description">Where taste meets sweet</p>
+                        <div class="item-meta">
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <img src="./Kashmala Dar_files/31a2e1b5833a4645942fb97289e56ab2.jpg" class="gallery-img">
+                    <div class="item-content">
+                        <h3 class="item-title">Noodles</h3>
+                        <p class="item-description">Spicy cuisine noodles</p>
+                        <div class="item-meta">
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <img src="./Kashmala Dar_files/01222990e7ae4c6cb76c47ef93eb4696.jpg" class="gallery-img">
+                    <div class="item-content">
+                        <h3 class="item-title">Noodles</h3>
+                        <p class="item-description">Noodles love with super knoor</p>
+                        <div class="item-meta">
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <img src="./Kashmala Dar_files/74d4e145f0b653013e0216fa84c992c4.jpg" class="gallery-img">
+                    <div class="item-content">
+                        <h3 class="item-title">Wings</h3>
+                        <p class="item-description">Extra spicy and juicy</p>
+                        <div class="item-meta">
+                        </div>
+                    </div>
+                </div>
+                 <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <img src="./Kashmala Dar_files/cc04a50d86a128819be171677ff0adac.jpg" class="gallery-img">
+                    <div class="item-content">
+                        <h3 class="item-title">Chicken Momos</h3>
+                        <p class="item-description">Spicy chicken momos</p>
+                        <div class="item-meta">
+                        </div>
+                    </div>
+                </div>
+                 <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <img src="./Kashmala Dar_files/fe4c17584bfb499f4c560976fc5a8558.jpg" class="gallery-img">
+                    <div class="item-content">
+                        <h3 class="item-title">Beef chezious burger</h3>
+                        <p class="item-description">Unleash the flavor</p>
+                        <div class="item-meta">
+                        </div>
+                    </div>
+                </div>
+                 <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <img src="./Kashmala Dar_files/79e4b7bd37fcf853861d7b9109201e41.jpg" class="gallery-img">
+                    <div class="item-content">
+                        <h3 class="item-title">Avocado</h3>
+                        <p class="item-description">Healthy chocolate avocado</p>
+                        <div class="item-meta">
+                        </div>
+                    </div>
+                </div>
+                 <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <img src="./Kashmala Dar_files/ad1ccad5211887703bb358c19723972e.jpg" class="gallery-img">
+                    <div class="item-content">
+                        <h3 class="item-title">Biryani</h3>
+                        <p class="item-description">National biryani masala</p>
+                        <div class="item-meta">
+                        </div>
+                    </div>
+                </div>
+                 <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <img src="./Kashmala Dar_files/e47436ae5aee61d1f6215cbd62c486bf.jpg" class="gallery-img">
+                    <div class="item-content">
+                        <h3 class="item-title">Cake</h3>
+                        <p class="item-description">Cheese cake with extra taste</p>
+                        <div class="item-meta">
+                        </div>
+                    </div>
+                </div>
+                 <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <img src="./Kashmala Dar_files/5ac30fc6735e144dc42a3f5e692263ab.jpg" class="gallery-img">
+                    <div class="item-content">
+                        <h3 class="item-title">Max protein</h3>
+                        <p class="item-description">Protein diet for GYM</p>
+                        <div class="item-meta">
+                        </div>
+                    </div>
+                </div>
+                 <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <img src="./Kashmala Dar_files/0c3b2ec7c3f6202e51203febace16e50.jpg" class="gallery-img">
+                    <div class="item-content">
+                        <h3 class="item-title">Coco Rama</h3>
+                        <p class="item-description">Signature chocolate flavor</p>
+                        <div class="item-meta">
+                        </div>
+                    </div>
+                </div>
+                 <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <img src="./Kashmala Dar_files/02bee930fb4d1b6ea50e5eadb30651d7.jpg" class="gallery-img">
+                    <div class="item-content">
+                        <h3 class="item-title">Dessert</h3>
+                        <p class="item-description">Chocolate Cupcake</p>
+                        <div class="item-meta">
+                        </div>
+                    </div>
+                </div>
+                 <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <img src="./Kashmala Dar_files/0098d2a68a0f1d7081fa2ec03ab50a6b.jpg" class="gallery-img">
+                    <div class="item-content">
+                        <h3 class="item-title">Coffee</h3>
+                        <p class="item-description">Lattee Cappucino</p>
+                        <div class="item-meta">
+                        </div>
+                    </div>
+                </div>
+                 <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <img src="./Kashmala Dar_files/09706341a26c96419d1f99316ff88b46.jpg" class="gallery-img">
+                    <div class="item-content">
+                        <h3 class="item-title">ICE cream</h3>
+                        <p class="item-description">Menu card</p>
+                        <div class="item-meta">
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <img src="./Kashmala Dar_files/3b42fcd9043500c714507cf7d0a53b5c.jpg" class="gallery-img">
+                    <div class="item-content">
+                        <h3 class="item-title">Menu card</h3>
+                        <p class="item-description">Today's special menu</p>
+                        <div class="item-meta">
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <img src="./Kashmala Dar_files/09706341a26c96419d1f99316ff88b46.jpg" class="gallery-img">
+                    <div class="item-content">
+                        <h3 class="item-title">ICE cream</h3>
+                        <p class="item-description">Menu card</p>
+                        <div class="item-meta">
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <img src="./Kashmala Dar_files/c70c351e430fab6c766642463b429adf.jpg" class="gallery-img">
+                    <div class="item-content">
+                        <h3 class="item-title">Ice cream</h3>
+                        <p class="item-description">Where taste meets with pistachio</p>
+                        <div class="item-meta">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Resume Gallery -->
+        <section class="gallery-section" data-category="people">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">Resume</h2>
+                    <p class="section-subtitle">Elevate your job search with a professionally designed resume!</p>
+                </div>
+                <a href="file:///C:/Users/emand/Downloads/Grouped%20Gallery.html#" class="view-all">View All →</a>
+            </div>
+            <div class="grid-wrapper">
+                <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <img src="./Kashmala Dar_files/97d2f31e06fd5bca2a7a281ad3758aa1.jpg" class="gallery-img">
+                    <div class="item-content">
+                        <h3 class="item-title">Pharmacist Resume</h3>
+                        <p class="item-description">Resume that stands out, career that takes off!</p>
+                    </div>
+                </div>
+                <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <img src="./Kashmala Dar_files/d4638322de18d25372398a8945f8e6ac.jpg" class="gallery-img">
+                    <div class="item-content">
+                        <h3 class="item-title">Graphics designer Resume</h3>
+                        <p class="item-description">Your career story, beautifully told!</p>
+                        </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Book Gallery -->
+        <section class="gallery-section" data-category="wildlife">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">Book cover &amp; Design</h2>
+                    <p class="section-subtitle">Untamed nature in its purest form</p>
+                </div>
+                <a href="file:///C:/Users/emand/Downloads/Grouped%20Gallery.html#" class="view-all">View All →</a>
+            </div>
+            <div class="grid-wrapper">
+                <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <img src="./Kashmala Dar_files/690afd18f5a46c0c1d2fe5e89eb2b432.jpg" class="gallery-img">
+                    <div class="item-content">
+                        <h3 class="item-title">Mother's Love</h3>
+                        <p class="item-description">A cover that stands out, a book that shines!</p>
+                       </div>
+                </div>
+                
+                <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <img src="./Kashmala Dar_files/ccd9b84adff8781a2cbe2eec17e8c1da.jpg" class="gallery-img">
+                    <div class="item-content">
+                        <h3 class="item-title">Unpaved Path</h3>
+                        <p class="item-description">Unleash your story with a captivating cover!</p>
+                       </div>
+                </div>
+                <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <img src="./Kashmala Dar_files/340497d32db28f40a8241a8aff41f15f.jpg" class="gallery-img">
+                    <div class="item-content">
+                        <h3 class="item-title">Hope</h3>
+                        <p class="item-description">Hope is within you!</p>
+                        </div>
+                </div>
+                <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <img src="./Kashmala Dar_files/3b8a7804036765344ade06a0aa402b7e.jpg" class="gallery-img">
+                    <div class="item-content">
+                        <h3 class="item-title">Graphic Designer</h3>
+                        <p class="item-description">A cover that grabs attention, a story that sells!</p>
+                        </div>
+                </div>
+                <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <img src="./Kashmala Dar_files/e6ce257204438bedcf2aba28b124c37e.jpg" class="gallery-img">
+                    <div class="item-content">
+                        <h3 class="item-title">People's Network</h3>
+                        <p class="item-description">Designing the perfect cover for your masterpiece!</p>
+                        </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Presentations Gallery -->
+        <section class="gallery-section" data-category="people">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">Presentations</h2>
+                    <p class="section-subtitle">Elevate your job search with a professionally designed resume!</p>
+                </div>
+                <a href="file:///C:/Users/emand/Downloads/Grouped%20Gallery.html#" class="view-all">View All →</a>
+            </div>
+            <div class="grid-wrapper">
+                <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <a href="https://www.behance.net/gallery/231438145/Presentation-Design-For-My-Client/modules/1327287569" target="_blank"><img src="./Kashmala Dar_files/fe5539aa6350723dd0e9f99777a46e20.jpg" class="gallery-img"></a>
+                    <div class="item-content">
+                        <h3 class="item-title">Pharmacist Resume</h3>
+                        <p class="item-description">Present with impact, persuade with design!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Abstract Gallery -->
+        <section class="gallery-section" data-category="abstract">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">Visual Marketings</h2>
+                    <p class="section-subtitle">Abstract compositions and creative visions</p>
+                </div>
+                <a href="file:///C:/Users/emand/Downloads/Grouped%20Gallery.html#" class="view-all">View All →</a>
+            </div>
+            <div class="grid-wrapper">
+                <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <img src="./Kashmala Dar_files/cba29fe82dd1e3c7cc46d2f33b51dc33.jpg" class="gallery-img">
+                    <div class="item-content">
+                        <h3 class="item-title">Singer Concert Poster</h3>
+                        <p class="item-description">Designing marketing magic that converts!</p>
+                        </div>
+                </div>
+                <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <img src="./Kashmala Dar_files/3288aa470bf909956b974bc985f7bc33.jpg" class="gallery-img">
+                    <div class="item-content">
+                        <h3 class="item-title">Birds Love</h3>
+                        <p class="item-description">Where nature meets marketing strategy!</p>
+                        </div>
+                </div>
+                <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <img src="./Kashmala Dar_files/67a73b9f2ae1e57a285ef42530676e14.jpg" class="gallery-img">
+                    <div class="item-content">
+                        <h3 class="item-title">Volunteer Community</h3>
+                        <p class="item-description">Designing campaigns that resonate!</p>
+                       </div>
+                </div>
+                <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <img src="./Kashmala Dar_files/335f737532122c214699e08f6df95512.jpg" class="gallery-img">
+                    <div class="item-content">
+                        <h3 class="item-title">Annual Prize Distribution card</h3>
+                        <p class="item-description">Elevate your brand's visual story!</p>
+                       </div>
+                </div>
+                <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <img src="./Kashmala Dar_files/e19bc6889850866446e3de666b3b43cb.jpg" class="gallery-img">
+                    <div class="item-content">
+                        <h3 class="item-title">Furniture Design</h3>
+                        <p class="item-description">Visuals that captivate, campaigns that thrive!</p>
+                       </div>
+                </div>
+                <div class="gallery-item" style="opacity: 1; transform: translateY(0px); transition: opacity 0.5s, transform 0.5s;">
+                    <img src="./Kashmala Dar_files/5546c72cfed7bdfd39e7a31d2a9e5515.jpg" class="gallery-img">
+                    <div class="item-content">
+                        <h3 class="item-title">Wedding Cards</h3>
+                        <p class="item-description">Designing campaigns that resonate!</p>
+                       </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const gallerySections = document.querySelectorAll('.gallery-section');
+
+            // Filter functionality
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    const filter = button.dataset.filter;
+
+                    // Filter galleries
+                    gallerySections.forEach(section => {
+                        if (filter === 'all' || section.dataset.category === filter) {
+                            section.style.display = 'block';
+                        } else {
+                            section.style.display = 'none';
+                        }
+                    });
+
+                    // Smooth scroll to first visible section
+                    const firstVisible = document.querySelector('.gallery-section[style="display: block;"]');
+                    if (firstVisible) {
+                        firstVisible.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+
+            // Intersection Observer for subtle animations
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Apply to gallery items
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                item.style.opacity = 0;
+                item.style.transform = 'translateY(20px)';
+                item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(item);
+            });
+        });
+    </script>
+
+
+</body></html>
